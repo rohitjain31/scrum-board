@@ -6,5 +6,35 @@
     </mat-toolbar-row>
 </mat-toolbar>
 
+<br>
+<br>
 
-<app-card-view></app-card-view>
+<mat-grid-list cols="6">
+    <mat-grid-tile
+        *ngFor="let tile of tiles"
+        [colspan]="1"
+        [style.background]="tile.color"
+    >
+        {{tile.text}}
+    </mat-grid-tile>
+
+    <mat-grid-tile
+        *ngFor="let tile of tiles"
+        [colspan]="1"
+        [style.background]="tile.color"
+    >
+        <div class="card-block">
+            <app-card-view></app-card-view>
+        </div>
+    </mat-grid-tile>
+
+    <mat-grid-tile
+        *ngFor="let tile of tiles"
+        [colspan]="1"
+        [style.background]="tile.color"
+    >
+        <div class="card-block">
+            <app-card-view></app-card-view>
+        </div>
+    </mat-grid-tile>
+</mat-grid-list>

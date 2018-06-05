@@ -8,18 +8,22 @@ import {
     MatButtonModule,
     MatToolbarModule,
     MatIconModule,
-    MatCardModule
+    MatCardModule,
+    MatDialogModule,
+    MatGridListModule
 } from '@angular/material';
 
 import { AppComponent } from './app.component';
 import { HomeComponent } from './home/home.component';
 import { CardViewComponent } from './card-view/card-view.component';
+import { FormAddComponent } from './form-add/form-add.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     HomeComponent,
-    CardViewComponent
+    CardViewComponent,
+    FormAddComponent
   ],
   imports: [
     BrowserModule,
@@ -29,7 +33,9 @@ import { CardViewComponent } from './card-view/card-view.component';
     MatButtonModule,
     MatToolbarModule,
     MatIconModule,
-    MatCardModule
+    MatCardModule,
+    MatDialogModule,
+    MatGridListModule
   ],
   providers: [],
   bootstrap: [AppComponent]
