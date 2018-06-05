@@ -1,0 +1,32 @@
+.example-card {
+  max-width: 200px;
+  max-height: 200px;
+}
+
+mat-card-actions {
+    text-align: right;
+}
+
+mat-card {
+    padding: 12px 24px 24px 12px;
+}
+
+mat-card-content {
+    margin: 0px 8px 15px 8px;
+}
+
+.card-title {
+    font-size: 16px;
+    font-weight: bold;
+}
+
+.card-description {
+    padding-bottom: 10px;
+}
+
+.card-info {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: baseline;
+}
