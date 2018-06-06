@@ -4,5 +4,5 @@ export class Issue {
     public description: string;
     public storyPoint: number;
     public type: string;
-    public phase: string;
+    public stage: string;
 }

@@ -1,5 +1,6 @@
-import { Component, OnInit, Output, EventEmitter } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter, Input } from '@angular/core';
 import { ActionType } from './../../models/action-type.enum';
+import { Issue } from './../../models/issue';
 
 @Component({
     selector: 'app-card-view',
@@ -8,13 +9,14 @@ import { ActionType } from './../../models/action-type.enum';
 })
 export class CardViewComponent implements OnInit {
 
-    @Output() public editDialog = new EventEmitter<ActionType>();
+    @Input() public issueValue: Issue;
+    @Output() public editDialog = new EventEmitter<Issue>();
     public constructor() { }
 
     public ngOnInit() {}
 
     public editIssueDialog() {
-        // this.editDialog.emit(ActionType.Update);
+            this.editDialog.emit(this.issueValue);
     }
 
 }

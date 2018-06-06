@@ -15,21 +15,23 @@ export class FormAddComponent implements OnInit {
 
     public constructor(private fb: FormBuilder,
         private dialogRef: MatDialogRef<FormAddComponent>,
-        @Inject(MAT_DIALOG_DATA) data)
+        @Inject(MAT_DIALOG_DATA) private data)
     {
             this.description = data.description;
             this.form = this.fb.group({
+                title: [data.title, Validators.required],
+                type: [data.type, Validators.required],
                 description: [data.description, Validators.required],
-                category: [data.category, Validators.required],
-                longDescription: [data.longDescription, Validators.required],
-                storypoint: [data.storypoint, Validators.required]
+                storypoint: [data.storyPoint, Validators.required],
+                stage: [data.stage, Validators.required]
             });
     }
 
     public ngOnInit() {}
 
     public save() {
-        this.dialogRef.close(this.form.value);
+        console.log({ ...{id: this.data.id}, ...this.form.value});
+        this.dialogRef.close({ ...{id: this.data.id}, ...this.form.value});
     }
 
     public close() {

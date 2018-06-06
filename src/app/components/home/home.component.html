@@ -11,9 +11,8 @@
 <br>
 <br>
 
-<mat-grid-list cols="6">
+<mat-grid-list cols="1" *ngFor="let tile of tiles">
     <mat-grid-tile
-        *ngFor="let tile of tiles"
         [colspan]="1"
         [style.background]="tile.color"
     >
@@ -21,26 +20,14 @@
     </mat-grid-tile>
 
     <mat-grid-tile
-        *ngFor="let tile of tiles"
+        *ngFor="let item of allIssue"
         [colspan]="1"
         [style.background]="tile.color"
     >
-        <div class="card-block">
-            <app-card-view
-                (editDialog)="editIssueDialog($event)"
-            ></app-card-view>
-        </div>
-    </mat-grid-tile>
-
-    <mat-grid-tile
-        *ngFor="let tile of tiles"
-        [colspan]="1"
-        [style.background]="tile.color"
-    >
-        <div class="card-block">
-            <app-card-view
-                (editDialog)="editIssueDialog($event)"
-            ></app-card-view>
-        </div>
+        <app-card-view
+            *ngIf="item.stage.toLowerCase() === tile.text.toLowerCase()"
+            (editDialog)="editIssueDialog($event)"
+            [issueValue]="item"
+        ></app-card-view>
     </mat-grid-tile>
 </mat-grid-list>

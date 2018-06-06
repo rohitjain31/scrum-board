@@ -2,7 +2,7 @@
 
 <mat-dialog-content [formGroup]="form">
     <mat-form-field>
-        <input matInput placeholder="Issue Title" formControlName="description" />
+        <input matInput placeholder="Issue Title" formControlName="title" />
     </mat-form-field>
 
     <mat-form-field>
@@ -10,15 +10,26 @@
     </mat-form-field>
 
     <mat-form-field>
-        <textarea matInput placeholder="Issue Description" formControlName="longDescription"></textarea>
+        <textarea matInput placeholder="Issue Description" formControlName="description"></textarea>
     </mat-form-field>
 
     <mat-form-field>
-        <mat-select placeholder="Issue Type" formControlName="category">
+        <mat-select placeholder="Issue Type" formControlName="type">
             <mat-option value="userstory">User Story</mat-option>
             <mat-option value="bug">Bug</mat-option>
             <mat-option value="task">Task</mat-option>
             <mat-option value="spike">Spike</mat-option>
+        </mat-select>
+    </mat-form-field>
+
+    <mat-form-field>
+        <mat-select placeholder="Stage" formControlName="stage">
+            <mat-option value="backlog">Backlog</mat-option>
+            <mat-option value="plan">Plan</mat-option>
+            <mat-option value="develop">Develop</mat-option>
+            <mat-option value="test">Test</mat-option>
+            <mat-option value="deploy">Deploy</mat-option>
+            <mat-option value="done">Done</mat-option>
         </mat-select>
     </mat-form-field>
 </mat-dialog-content>

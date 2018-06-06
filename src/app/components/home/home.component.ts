@@ -13,43 +13,77 @@ import { ActionType } from './../../models/action-type.enum';
 export class HomeComponent implements OnInit {
 
     public rowHeight: 'fit';
-    tiles = [
-        {text: 'Backlog', color: 'lightblue'},
+    public tiles = [
+        {text: 'Backlog', color: 'lightblue', issues: []},
         {text: 'Plan', color: 'lightgreen'},
         {text: 'Develop', color: 'lightpink'},
         {text: 'Test', color: '#DDBDF1'},
         {text: 'Deploy', color: 'lightgreen'},
         {text: 'Done', color: 'lightblue'},
+
     ];
+    public allIssue: Issue[];
+    public actionType: ActionType;
+
+    private readonly dialogConfig = new MatDialogConfig();
 
     public constructor(public dialog: MatDialog,
         private issueService: IssueService) { }
 
-    public ngOnInit() {}
+    public ngOnInit() {
+        this.dialogConfig.autoFocus = true;
+
+        this.dialogConfig.width = '500px';
+
+        this.issueService.issueListChanged.subscribe((data: Issue[]) => {
+            this.allIssue = data;
+        });
+        // this.dialogConfig.height = '450px';
+        this.getAllIssue();
+    }
+
+
+    public getAllIssue() {
+        // loader
+        this.allIssue = this.issueService.getAllIssue();
+    }
+
+    public operationOnIssueList(data: Issue) {
+        switch (this.actionType) {
+            case ActionType.Update:
+                this.updateIssueList(data);
+                break;
+            case ActionType.Add:
+                this.addIssue(data);
+                break;
+            default:
+                break;
+        }
+    }
+
+    public updateIssueList(data: Issue) {
+        this.issueService.updateIssue(data);
+    }
+
+    public addIssue(data: Issue) {
+
+    }
 
     public openCreateIssueDialouge() {
-        const dialogConfig = new MatDialogConfig();
-        dialogConfig.autoFocus = true;
+        this.actionType = ActionType.Add;
 
-        dialogConfig.data = {
-            description: 'description',
-            longDescription: 'longDescription',
-            category: 'category',
-            storypoint: 5
-        };
+        const dialogRef = this.dialog.open(FormAddComponent, this.dialogConfig);
 
-        dialogConfig.width = '500px';
-        dialogConfig.height = '430px';
-
-        const dialogRef = this.dialog.open(FormAddComponent, dialogConfig);
-
-        dialogRef.afterClosed().subscribe(
-            data => console.log('Dialog output:', data)
-        );
+        dialogRef.afterClosed().subscribe(data => this.operationOnIssueList(data));
     }
 
     public editIssueDialog(value) {
+        console.log(value);
+        this.actionType = ActionType.Update;
+        this.dialogConfig.data = value;
+        const dialogRef = this.dialog.open(FormAddComponent, this.dialogConfig);
 
+        dialogRef.afterClosed().subscribe(data => this.issueService.updateIssue(data));
     }
 
 }
