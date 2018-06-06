@@ -11,12 +11,18 @@ export class CardViewComponent implements OnInit {
 
     @Input() public issueValue: Issue;
     @Output() public editDialog = new EventEmitter<Issue>();
+    @Output() public deleteDialog = new EventEmitter<Issue>();
+
     public constructor() { }
 
     public ngOnInit() {}
 
     public editIssueDialog() {
-            this.editDialog.emit(this.issueValue);
+        this.editDialog.emit(this.issueValue);
+    }
+
+    public deleteIssueDialog() {
+        this.deleteDialog.emit(this.issueValue);
     }
 
 }

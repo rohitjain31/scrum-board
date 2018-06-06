@@ -27,6 +27,7 @@
         <app-card-view
             *ngIf="item.stage.toLowerCase() === tile.text.toLowerCase()"
             (editDialog)="editIssueDialog($event)"
+            (deleteDialog)="deleteIssue($event)"
             [issueValue]="item"
         ></app-card-view>
     </mat-grid-tile>

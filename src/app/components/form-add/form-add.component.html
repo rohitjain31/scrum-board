@@ -1,12 +1,12 @@
-<h2 mat-dialog-title>{{dialogTitle}}</h2>
+<h2 mat-dialog-title>{{getDialogTitle}}</h2>
 
-<mat-dialog-content [formGroup]="form">
+<mat-dialog-content [formGroup]="form" *ngIf="!deleteForm">
     <mat-form-field>
         <input matInput placeholder="Issue Title" formControlName="title" />
     </mat-form-field>
 
     <mat-form-field>
-        <input matInput placeholder="Story Point" type="number" formControlName="storypoint" />
+        <input matInput placeholder="Story Point" type="number" formControlName="storyPoint" />
     </mat-form-field>
 
     <mat-form-field>
@@ -34,7 +34,16 @@
     </mat-form-field>
 </mat-dialog-content>
 
+<mat-dialog-content *ngIf="deleteForm">
+    <div>
+        Are you sure, you want to delete Issue??
+    </div>
+</mat-dialog-content>
+
 <mat-dialog-actions>
     <button class="mat-raised-button" (click)="close()">Close</button>
-    <button class="mat-raised-button mat-primary" (click)="save()">Save</button>
+    <button
+        class="mat-raised-button mat-primary"
+        (click)="save()"
+    >{{getButtonText}}</button>
 </mat-dialog-actions>

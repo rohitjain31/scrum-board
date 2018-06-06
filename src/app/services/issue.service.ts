@@ -38,7 +38,6 @@ export class IssueService {
     }
 
     public updateIssue(data: Issue) {
-        console.log(data);
         this.issueList = this.issueList.map(
             elem => elem.id.toString() === data.id.toString() ? data : elem
         );
@@ -46,7 +45,7 @@ export class IssueService {
     }
 
     public deleteIssue(id: string) {
-        this.issueList = this.issueList.filter(elem => elem.id.toString() !== id);
+        this.issueList = this.issueList.filter(elem => elem.id.toString() !== id.toString());
         this.issueListChanged.emit(this.issueList);
     }
 }

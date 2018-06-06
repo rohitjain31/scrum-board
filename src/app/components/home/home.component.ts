@@ -12,9 +12,8 @@ import { ActionType } from './../../models/action-type.enum';
 })
 export class HomeComponent implements OnInit {
 
-    public rowHeight: 'fit';
     public tiles = [
-        {text: 'Backlog', color: 'lightblue', issues: []},
+        {text: 'Backlog', color: 'lightblue'},
         {text: 'Plan', color: 'lightgreen'},
         {text: 'Develop', color: 'lightpink'},
         {text: 'Test', color: '#DDBDF1'},
@@ -32,58 +31,60 @@ export class HomeComponent implements OnInit {
 
     public ngOnInit() {
         this.dialogConfig.autoFocus = true;
-
         this.dialogConfig.width = '500px';
+        this.dialogConfig.data = {
+            title: '',
+            description: '',
+            storyPoint: null,
+            type: '',
+            stage: '',
+        };
 
         this.issueService.issueListChanged.subscribe((data: Issue[]) => {
             this.allIssue = data;
         });
-        // this.dialogConfig.height = '450px';
         this.getAllIssue();
     }
 
 
     public getAllIssue() {
-        // loader
         this.allIssue = this.issueService.getAllIssue();
-    }
-
-    public operationOnIssueList(data: Issue) {
-        switch (this.actionType) {
-            case ActionType.Update:
-                this.updateIssueList(data);
-                break;
-            case ActionType.Add:
-                this.addIssue(data);
-                break;
-            default:
-                break;
-        }
-    }
-
-    public updateIssueList(data: Issue) {
-        this.issueService.updateIssue(data);
-    }
-
-    public addIssue(data: Issue) {
-
     }
 
     public openCreateIssueDialouge() {
         this.actionType = ActionType.Add;
-
+        this.dialogConfig.data = {
+            title: '',
+            description: '',
+            storyPoint: null,
+            type: '',
+            stage: 'backlog',
+            action: this.actionType
+        };
         const dialogRef = this.dialog.open(FormAddComponent, this.dialogConfig);
-
-        dialogRef.afterClosed().subscribe(data => this.operationOnIssueList(data));
+        dialogRef.afterClosed().subscribe((data) => {
+            if (data) this.issueService.createIssue(data);
+        });
     }
 
     public editIssueDialog(value) {
-        console.log(value);
         this.actionType = ActionType.Update;
-        this.dialogConfig.data = value;
+        this.dialogConfig.data = {...{ action: this.actionType }, ...value};
         const dialogRef = this.dialog.open(FormAddComponent, this.dialogConfig);
 
-        dialogRef.afterClosed().subscribe(data => this.issueService.updateIssue(data));
+        dialogRef.afterClosed().subscribe((data) => {
+            if (data) this.issueService.updateIssue(data);
+        });
+    }
+
+    public deleteIssue(value) {
+        this.actionType = ActionType.Delete;
+        this.dialogConfig.data = {...{ action: this.actionType }, ...value};
+        const dialogRef = this.dialog.open(FormAddComponent, this.dialogConfig);
+
+        dialogRef.afterClosed().subscribe((data) => {
+            if (data) this.issueService.deleteIssue(data.id);
+        });
     }
 
 }
