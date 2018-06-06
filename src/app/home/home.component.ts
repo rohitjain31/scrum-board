@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import {MatDialog, MatDialogRef, MAT_DIALOG_DATA} from '@angular/material';
+import { MatDialog, MatDialogConfig } from "@angular/material";
+import { FormAddComponent } from './../form-add/form-add.component';
 
 @Component({
     selector: 'app-home',
@@ -20,7 +21,27 @@ export class HomeComponent implements OnInit {
 
     public constructor(public dialog: MatDialog) { }
 
-    public ngOnInit() {
+    public ngOnInit() {}
+
+    public openCreateIssueDialouge() {
+        const dialogConfig = new MatDialogConfig();
+        dialogConfig.autoFocus = true;
+
+        dialogConfig.data = {
+            description: 'description',
+            longDescription: 'longDescription',
+            category: 'category',
+            storypoint: 5
+        };
+
+        dialogConfig.width = '500px';
+        dialogConfig.height = '430px';
+
+        const dialogRef = this.dialog.open(FormAddComponent, dialogConfig);
+
+        dialogRef.afterClosed().subscribe(
+            data => console.log('Dialog output:', data)
+        );
     }
 
 }

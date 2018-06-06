@@ -1,3 +1,29 @@
-<p>
-  form-add works!
-</p>
+<h2 mat-dialog-title>{{dialogTitle}}</h2>
+
+<mat-dialog-content [formGroup]="form">
+    <mat-form-field>
+        <input matInput placeholder="Issue Title" formControlName="description" />
+    </mat-form-field>
+
+    <mat-form-field>
+        <input matInput placeholder="Story Point" type="number" formControlName="storypoint" />
+    </mat-form-field>
+
+    <mat-form-field>
+        <textarea matInput placeholder="Issue Description" formControlName="longDescription"></textarea>
+    </mat-form-field>
+
+    <mat-form-field>
+        <mat-select placeholder="Issue Type" formControlName="category">
+            <mat-option value="userstory">User Story</mat-option>
+            <mat-option value="bug">Bug</mat-option>
+            <mat-option value="task">Task</mat-option>
+            <mat-option value="spike">Spike</mat-option>
+        </mat-select>
+    </mat-form-field>
+</mat-dialog-content>
+
+<mat-dialog-actions>
+    <button class="mat-raised-button" (click)="close()">Close</button>
+    <button class="mat-raised-button mat-primary" (click)="save()">Save</button>
+</mat-dialog-actions>

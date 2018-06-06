@@ -2,7 +2,9 @@
     <mat-toolbar-row>
         <span>Scrum Board</span>
         <span class="example-spacer"></span>
-        <button mat-raised-button color="primary">Create Issue</button>
+        <button mat-raised-button color="primary"
+            (click)="openCreateIssueDialouge()"
+        >Create Issue</button>
     </mat-toolbar-row>
 </mat-toolbar>
 

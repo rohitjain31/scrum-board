@@ -1,4 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Inject, ViewEncapsulation } from '@angular/core';
+import { MAT_DIALOG_DATA, MatDialogRef } from "@angular/material";
+import { FormBuilder, Validators, FormGroup } from '@angular/forms';
 
 @Component({
   selector: 'app-form-add',
@@ -7,9 +9,30 @@ import { Component, OnInit } from '@angular/core';
 })
 export class FormAddComponent implements OnInit {
 
-  constructor() { }
+    public form: FormGroup;
+    public description: string;
+    public dialogTitle = 'Create Issue';
 
-  ngOnInit() {
-  }
+    public constructor(private fb: FormBuilder,
+        private dialogRef: MatDialogRef<FormAddComponent>,
+        @Inject(MAT_DIALOG_DATA) data)
+    {
+            this.description = data.description;
+            this.form = this.fb.group({
+                description: [data.description, Validators.required],
+                category: [data.category, Validators.required],
+                longDescription: [data.longDescription, Validators.required],
+                storypoint: [data.storypoint, Validators.required]
+            });
+    }
 
+    public ngOnInit() {}
+
+    public save() {
+        this.dialogRef.close(this.form.value);
+    }
+
+    public close() {
+        this.dialogRef.close();
+    }
 }

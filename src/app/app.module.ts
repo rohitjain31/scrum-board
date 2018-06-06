@@ -1,6 +1,6 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
@@ -10,7 +10,10 @@ import {
     MatIconModule,
     MatCardModule,
     MatDialogModule,
-    MatGridListModule
+    MatGridListModule,
+    MatFormFieldModule,
+    MatSelectModule,
+    MatInputModule
 } from '@angular/material';
 
 import { AppComponent } from './app.component';
@@ -28,6 +31,7 @@ import { FormAddComponent } from './form-add/form-add.component';
   imports: [
     BrowserModule,
     FormsModule,
+    ReactiveFormsModule,
     HttpModule,
     BrowserAnimationsModule,
     MatButtonModule,
@@ -35,9 +39,13 @@ import { FormAddComponent } from './form-add/form-add.component';
     MatIconModule,
     MatCardModule,
     MatDialogModule,
-    MatGridListModule
+    MatGridListModule,
+    MatFormFieldModule,
+    MatSelectModule,
+    MatInputModule
   ],
   providers: [],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
+  entryComponents: [FormAddComponent]
 })
 export class AppModule { }
