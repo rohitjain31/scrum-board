@@ -1,6 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { MatDialog, MatDialogConfig } from "@angular/material";
 import { FormAddComponent } from './../form-add/form-add.component';
+import { IssueService } from './../../services/issue.service';
+import { Issue } from './../../models/issue';
+import { ActionType } from './../../models/action-type.enum';
 
 @Component({
     selector: 'app-home',
@@ -19,7 +22,8 @@ export class HomeComponent implements OnInit {
         {text: 'Done', color: 'lightblue'},
     ];
 
-    public constructor(public dialog: MatDialog) { }
+    public constructor(public dialog: MatDialog,
+        private issueService: IssueService) { }
 
     public ngOnInit() {}
 
@@ -42,6 +46,10 @@ export class HomeComponent implements OnInit {
         dialogRef.afterClosed().subscribe(
             data => console.log('Dialog output:', data)
         );
+    }
+
+    public editIssueDialog(value) {
+
     }
 
 }

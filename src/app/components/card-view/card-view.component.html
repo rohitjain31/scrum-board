@@ -14,7 +14,11 @@
         </div>
     </mat-card-content>
     <mat-card-actions>
-        <button mat-raised-button color="primary">Edit</button>
+        <button
+            mat-raised-button
+            color="primary"
+            (click)="editIssueDialog()"
+        >Edit</button>
         <button mat-raised-button color="primary">Delete</button>
     </mat-card-actions>
 </mat-card>

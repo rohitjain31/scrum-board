@@ -17,9 +17,9 @@ import {
 } from '@angular/material';
 
 import { AppComponent } from './app.component';
-import { HomeComponent } from './home/home.component';
-import { CardViewComponent } from './card-view/card-view.component';
-import { FormAddComponent } from './form-add/form-add.component';
+import { HomeComponent } from './components/home/home.component';
+import { CardViewComponent } from './components/card-view/card-view.component';
+import { FormAddComponent } from './components/form-add/form-add.component';
 
 @NgModule({
   declarations: [
