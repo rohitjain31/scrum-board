@@ -8,27 +8,37 @@
     </mat-toolbar-row>
 </mat-toolbar>
 
-<br>
-<br>
+<div class="grid-list-container">
+    <mat-grid-list cols="1" *ngFor="let tile of tiles"  rowHeight="50px">
+        <mat-grid-tile class="header"
+            [colspan]="1"
+            [style.background]="tile.color"
+        >
+            {{tile.text}}
+        </mat-grid-tile>
 
-<mat-grid-list cols="1" *ngFor="let tile of tiles">
-    <mat-grid-tile
-        [colspan]="1"
-        [style.background]="tile.color"
-    >
-        {{tile.text}}
-    </mat-grid-tile>
+        <ng-container *ngFor="let item of issueObjects[tile.text.toLowerCase()]">
+            <mat-grid-tile [rowspan]="4"
+                *ngIf="item.stage.toLowerCase() === tile.text.toLowerCase()"
+                [colspan]="1"
+                [style.background]="tile.color"
+            >
+                <app-card-view
 
-    <mat-grid-tile
-        *ngFor="let item of allIssue"
-        [colspan]="1"
-        [style.background]="tile.color"
-    >
-        <app-card-view
-            *ngIf="item.stage.toLowerCase() === tile.text.toLowerCase()"
-            (editDialog)="editIssueDialog($event)"
-            (deleteDialog)="deleteIssue($event)"
-            [issueValue]="item"
-        ></app-card-view>
-    </mat-grid-tile>
-</mat-grid-list>
+                    (editDialog)="editIssueDialog($event)"
+                    (deleteDialog)="deleteIssue($event)"
+                    [issueValue]="item"
+                ></app-card-view>
+            </mat-grid-tile>
+        </ng-container>
+        <ng-container *ngFor="let item of maxTiles(issueObjects[tile.text.toLowerCase()].length)">
+            <mat-grid-tile [rowspan]="4"
+
+                [colspan]="1"
+                [style.background]="tile.color"
+            >
+            </mat-grid-tile>
+        </ng-container>
+
+    </mat-grid-list>
+</div>

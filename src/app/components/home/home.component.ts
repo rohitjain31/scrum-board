@@ -22,7 +22,11 @@ export class HomeComponent implements OnInit {
 
     ];
     public allIssue: Issue[];
+    public issueObjects: any;
+
     public actionType: ActionType;
+
+    public extraTiles = new Array(3).fill(1);
 
     private readonly dialogConfig = new MatDialogConfig();
 
@@ -42,13 +46,24 @@ export class HomeComponent implements OnInit {
 
         this.issueService.issueListChanged.subscribe((data: Issue[]) => {
             this.allIssue = data;
+            this.issueObjects = this.issueService.issueObj;
         });
         this.getAllIssue();
     }
 
+    maxTiles(count: number = 0){
+        let max = 0;
+        Object.keys(this.issueObjects).forEach((key) => {
+            if(max < this.issueObjects[key].length){
+                max = this.issueObjects[key].length;
+            }
+        });
 
+        return (new Array(max - count)).fill(1);
+    }
     public getAllIssue() {
         this.allIssue = this.issueService.getAllIssue();
+        this.issueObjects = this.issueService.issueObj;
     }
 
     public openCreateIssueDialouge() {
