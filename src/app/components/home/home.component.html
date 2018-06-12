@@ -48,6 +48,6 @@
     </mat-grid-list>
 </div>
 
-<div *ngIf="allIssue.length === 0" class="no-issue">
+<div *ngIf="allIssue.length === 0 && !loading" class="no-issue">
     <h3>There is no existing issue. Please create one.</h3>
 </div>

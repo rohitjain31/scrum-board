@@ -14,7 +14,8 @@ import {
     MatFormFieldModule,
     MatSelectModule,
     MatInputModule,
-    MatProgressSpinnerModule
+    MatProgressSpinnerModule,
+    MatSnackBarModule
 } from '@angular/material';
 
 import { AppComponent } from './app.component';
@@ -44,7 +45,8 @@ import { FormAddComponent } from './components/form-add/form-add.component';
     MatFormFieldModule,
     MatSelectModule,
     MatInputModule,
-    MatProgressSpinnerModule
+    MatProgressSpinnerModule,
+    MatSnackBarModule
   ],
   providers: [],
   bootstrap: [AppComponent],

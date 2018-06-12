@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { MatDialog, MatDialogConfig } from "@angular/material";
 import { FormAddComponent } from './../form-add/form-add.component';
 import { IssueService } from './../../services/issue.service';
+import { MatSnackBar } from '@angular/material';
 import { Issue } from './../../models/issue';
 import { ActionType } from './../../models/action-type.enum';
 
@@ -12,15 +13,7 @@ import { ActionType } from './../../models/action-type.enum';
 })
 export class HomeComponent implements OnInit {
 
-    public tiles = [
-        {text: 'Backlog', color: 'lightblue'},
-        {text: 'Plan', color: 'lightgreen'},
-        {text: 'Develop', color: 'lightpink'},
-        {text: 'Test', color: '#DDBDF1'},
-        {text: 'Deploy', color: 'lightgreen'},
-        {text: 'Done', color: 'lightblue'},
-
-    ];
+    public tiles = [];
     public allIssue: Issue[] = [];
     public issueObjects: any;
 
@@ -32,6 +25,7 @@ export class HomeComponent implements OnInit {
     private readonly dialogConfig = new MatDialogConfig();
 
     public constructor(public dialog: MatDialog,
+        private snackBar: MatSnackBar
         private issueService: IssueService) { }
 
     public ngOnInit() {
@@ -44,12 +38,19 @@ export class HomeComponent implements OnInit {
             type: '',
             stage: '',
         };
+        this.tiles = this.issueService.tilesInfo;
 
         this.issueService.issueListChanged.subscribe((data: Issue[]) => {
             this.allIssue = data;
             this.issueObjects = this.issueService.issueObj;
         });
         this.getAllIssue();
+    }
+
+    public showMessage(message) {
+        this.snackBar.open(message, '', {
+            duration: 2000
+        });
     }
 
     maxTiles(count: number = 0){
@@ -72,7 +73,7 @@ export class HomeComponent implements OnInit {
                 this.issueObjects = this.issueService.issueObj;
             }, (error) => {
                 this.loading = false;
-                console.log(error);
+                this.showMessage('There is some error. Please try again!!!');
             });
     }
 
@@ -94,9 +95,10 @@ export class HomeComponent implements OnInit {
                     .subscribe((response) => {
                         this.loading = false;
                         this.issueService.addToIssueList(response.issue);
+                        this.showMessage('Issue added successfully');
                     }, (error) => {
                         this.loading = false;
-                        console.log(error);
+                        this.showMessage('There is some error. Please try again!!!');
                     });
             }
         });
@@ -114,9 +116,10 @@ export class HomeComponent implements OnInit {
                     .subscribe((response) => {
                         this.loading = false;
                         this.issueService.updateIssueList(response.issue);
+                        this.showMessage('Issue updated successfully');
                     }, (error) => {
                         this.loading = false;
-                        console.log(error);
+                        this.showMessage('There is some error. Please try again!!!');
                     })
             }
         });
@@ -134,9 +137,10 @@ export class HomeComponent implements OnInit {
                     .subscribe((response) => {
                         this.loading = false;
                         this.issueService.removeFromIssueList(data.id);
+                        this.showMessage('Issue deleted successfully');
                     }, (error) => {
                         this.loading = false;
-                        console.log(error);
+                        this.showMessage('There is some error. Please try again!!!');
                     });
             }
         });

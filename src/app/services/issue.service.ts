@@ -12,6 +12,14 @@ export class IssueService {
     private readonly apiUrl = 'https://aqueous-depths-69894.herokuapp.com/api/issues';
     public issueListChanged = new EventEmitter<Issue[]>();
     public issueObj = {};
+    public tilesInfo = [
+        {text: 'Backlog', color: 'lightblue'},
+        {text: 'Plan', color: '#e5da57'},
+        {text: 'Develop', color: 'lightpink'},
+        {text: 'Test', color: '#a4bcc8'},
+        {text: 'Deploy', color: '#76b0d9'},
+        {text: 'Done', color: 'lightgreen'}
+    ]
 
     public constructor(private httpClient: HttpClient) { }
 
