@@ -16,12 +16,15 @@
 }
 
 .mat-grid-list {
-    // width: 15.5%;
-    // display: inline-block;
     flex-grow: 1;
     margin: 5px;
 }
 
 .mat-grid-tile.header{
   font-weight: bold;
+}
+
+.no-issue {
+    text-align: center;
+    margin-top: 50px;
 }

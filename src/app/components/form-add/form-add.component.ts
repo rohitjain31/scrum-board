@@ -60,7 +60,7 @@ export class FormAddComponent implements OnInit {
     }
 
     public save() {
-        const id = this.data.action === ActionType.Add ? Date.now() : this.data.id;
+        const id = this.data.action === ActionType.Add ? Date.now() : this.data['_id'];
         this.dialogRef.close({ ...{ id, stage: this.data.stage }, ...this.form.value});
     }
 

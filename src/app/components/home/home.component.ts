@@ -21,7 +21,7 @@ export class HomeComponent implements OnInit {
         {text: 'Done', color: 'lightblue'},
 
     ];
-    public allIssue: Issue[];
+    public allIssue: Issue[] = [];
     public issueObjects: any;
 
     public actionType: ActionType;
@@ -62,8 +62,14 @@ export class HomeComponent implements OnInit {
         return (new Array(max - count)).fill(1);
     }
     public getAllIssue() {
-        this.allIssue = this.issueService.getAllIssue();
-        this.issueObjects = this.issueService.issueObj;
+        this.issueService.getAllIssue()
+            .subscribe((response) => {
+                this.issueService.createIssueList(response.issues);
+                this.allIssue = response.issues;
+                this.issueObjects = this.issueService.issueObj;
+            }, (error) => {
+                console.log(error);
+            });
     }
 
     public openCreateIssueDialouge() {
@@ -78,7 +84,14 @@ export class HomeComponent implements OnInit {
         };
         const dialogRef = this.dialog.open(FormAddComponent, this.dialogConfig);
         dialogRef.afterClosed().subscribe((data) => {
-            if (data) this.issueService.createIssue(data);
+            if (data) {
+                this.issueService.createIssue(data)
+                    .subscribe((response) => {
+                        this.issueService.addToIssueList(response.issue);
+                    }, (error) => {
+                        console.log(error);
+                    });
+            }
         });
     }
 
@@ -88,7 +101,14 @@ export class HomeComponent implements OnInit {
         const dialogRef = this.dialog.open(FormAddComponent, this.dialogConfig);
 
         dialogRef.afterClosed().subscribe((data) => {
-            if (data) this.issueService.updateIssue(data);
+            if (data) {
+                this.issueService.updateIssue(data)
+                    .subscribe((response) => {
+                        this.issueService.updateIssueList(response.issue);
+                    }, (error) => {
+                        console.log(error);
+                    })
+            }
         });
     }
 
@@ -98,7 +118,14 @@ export class HomeComponent implements OnInit {
         const dialogRef = this.dialog.open(FormAddComponent, this.dialogConfig);
 
         dialogRef.afterClosed().subscribe((data) => {
-            if (data) this.issueService.deleteIssue(data.id);
+            if (data) {
+                this.issueService.deleteIssue(data.id)
+                    .subscribe((response) => {
+                        this.issueService.removeFromIssueList(data.id);
+                    }, (error) => {
+                        console.log(error);
+                    });
+            }
         });
     }
 

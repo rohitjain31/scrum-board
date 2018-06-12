@@ -1,4 +1,5 @@
 import { Injectable, EventEmitter } from '@angular/core';
+import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { Issue } from './../models/issue';
 
 @Injectable({
@@ -6,43 +7,12 @@ import { Issue } from './../models/issue';
 })
 export class IssueService {
 
-    public issueList: Issue[] = [
-        {
-            id: '1',
-            title: 'Issue1',
-            description: 'This is issue 1',
-            storyPoint: 3,
-            type: 'bug',
-            stage: 'backlog'
-        },
-        {
-            id: '2',
-            title: 'Issue2',
-            description: 'This is issue 1',
-            storyPoint: 3,
-            type: 'bug',
-            stage: 'backlog'
-        },
-        {
-            id: '3',
-            title: 'Issue3',
-            description: 'This is issue 3',
-            storyPoint: 3,
-            type: 'bug',
-            stage: 'develop'
-        }
-
-
-    ];
+    public issueList: Issue[] = [];
+    private readonly apiUrl = 'https://aqueous-depths-69894.herokuapp.com/api/issues';
     public issueListChanged = new EventEmitter<Issue[]>();
     public issueObj = {};
 
-    public constructor() { }
-
-    public getAllIssue() {
-        this.buildIssueObject(this.issueList);
-        return this.issueList;
-    }
+    public constructor(private httpClient: HttpClient) { }
 
     private buildIssueObject(issues: Issue[]) {
         this.issueObj = {
@@ -54,30 +24,48 @@ export class IssueService {
             done: []
         };
         issues.forEach((elem, index) => {
-            // if (!this.issueObj[elem.stage])
-            //     this.issueObj[elem.stage] = [];
-
             this.issueObj[elem.stage].push(elem);
         });
     }
 
-    public createIssue(data: Issue) {
-        this.issueList.push(data);
+    public createIssueList(issues: Issue[]) {
+        this.issueList = issues;
+        this.buildIssueObject(this.issueList);
+    }
+
+    public addToIssueList(issue: Issue) {
+        this.issueList.push(issue);
         this.buildIssueObject(this.issueList);
         this.issueListChanged.emit(this.issueList);
     }
 
-    public updateIssue(data: Issue) {
+    public updateIssueList(issue: Issue) {
         this.issueList = this.issueList.map(
-            elem => elem.id.toString() === data.id.toString() ? data : elem
+            elem => elem['_id'].toString() === issue['_id'].toString() ? issue : elem
         );
         this.buildIssueObject(this.issueList);
         this.issueListChanged.emit(this.issueList);
     }
 
-    public deleteIssue(id: string) {
-        this.issueList = this.issueList.filter(elem => elem.id.toString() !== id.toString());
+    public removeFromIssueList(id: string) {
+        this.issueList = this.issueList.filter(elem => elem['_id'].toString() !== id.toString());
         this.buildIssueObject(this.issueList);
         this.issueListChanged.emit(this.issueList);
+    }
+
+    public getAllIssue() {
+        return this.httpClient.get<any>(`${this.apiUrl}/getAllIssue`);
+    }
+
+    public createIssue(data: Issue) {
+        return this.httpClient.post<any>(`${this.apiUrl}/create`, data);
+    }
+
+    public updateIssue(data: Issue) {
+        return this.httpClient.put<any>(`${this.apiUrl}/update`, data);
+    }
+
+    public deleteIssue(id: string) {
+        return this.httpClient.delete<any>(`${this.apiUrl}/delete/${id}`);
     }
 }

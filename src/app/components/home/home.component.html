@@ -8,7 +8,7 @@
     </mat-toolbar-row>
 </mat-toolbar>
 
-<div class="grid-list-container">
+<div class="grid-list-container" *ngIf="allIssue.length > 0">
     <mat-grid-list cols="1" *ngFor="let tile of tiles"  rowHeight="50px">
         <mat-grid-tile class="header"
             [colspan]="1"
@@ -41,4 +41,8 @@
         </ng-container>
 
     </mat-grid-list>
+</div>
+
+<div *ngIf="allIssue.length === 0" class="no-issue">
+    <h3>There is no existing issue. Please create one.</h3>
 </div>
