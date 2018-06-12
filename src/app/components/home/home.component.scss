@@ -28,3 +28,28 @@
     text-align: center;
     margin-top: 50px;
 }
+
+.loading-container {
+    top: 40%;
+    position: absolute;
+    z-index: 1111;
+    left: 50%;
+}
+
+.loading-overlay {
+    position: absolute;
+    top: 0px;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgb(230, 235, 235);
+    z-index: 0;
+    opacity: 0;
+    transition: opacity 0.3s ease-out;
+
+    &.loading {
+        z-index: 1;
+        opacity: 0.5;
+        transition: opacity 0.3s ease-in;
+    }
+}

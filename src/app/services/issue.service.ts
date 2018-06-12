@@ -1,6 +1,7 @@
 import { Injectable, EventEmitter } from '@angular/core';
 import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { Issue } from './../models/issue';
+import { Observable } from 'rxjs';
 
 @Injectable({
     providedIn: 'root'
@@ -53,7 +54,7 @@ export class IssueService {
         this.issueListChanged.emit(this.issueList);
     }
 
-    public getAllIssue() {
+    public getAllIssue(): Observable<any> {
         return this.httpClient.get<any>(`${this.apiUrl}/getAllIssue`);
     }
 

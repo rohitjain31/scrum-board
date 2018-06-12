@@ -8,6 +8,12 @@
     </mat-toolbar-row>
 </mat-toolbar>
 
+<div class="loading-container" *ngIf="loading">
+    <mat-spinner></mat-spinner>
+</div>
+
+<div class="loading-overlay" [class.loading]="loading" *ngIf="loading"></div>
+
 <div class="grid-list-container" *ngIf="allIssue.length > 0">
     <mat-grid-list cols="1" *ngFor="let tile of tiles"  rowHeight="50px">
         <mat-grid-tile class="header"
@@ -33,7 +39,6 @@
         </ng-container>
         <ng-container *ngFor="let item of maxTiles(issueObjects[tile.text.toLowerCase()].length)">
             <mat-grid-tile [rowspan]="4"
-
                 [colspan]="1"
                 [style.background]="tile.color"
             >

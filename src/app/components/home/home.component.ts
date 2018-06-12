@@ -25,6 +25,7 @@ export class HomeComponent implements OnInit {
     public issueObjects: any;
 
     public actionType: ActionType;
+    public loading = false;
 
     public extraTiles = new Array(3).fill(1);
 
@@ -62,12 +63,15 @@ export class HomeComponent implements OnInit {
         return (new Array(max - count)).fill(1);
     }
     public getAllIssue() {
+        this.loading = true;
         this.issueService.getAllIssue()
             .subscribe((response) => {
+                this.loading = false;
                 this.issueService.createIssueList(response.issues);
                 this.allIssue = response.issues;
                 this.issueObjects = this.issueService.issueObj;
             }, (error) => {
+                this.loading = false;
                 console.log(error);
             });
     }
@@ -85,10 +89,13 @@ export class HomeComponent implements OnInit {
         const dialogRef = this.dialog.open(FormAddComponent, this.dialogConfig);
         dialogRef.afterClosed().subscribe((data) => {
             if (data) {
+                this.loading = true;
                 this.issueService.createIssue(data)
                     .subscribe((response) => {
+                        this.loading = false;
                         this.issueService.addToIssueList(response.issue);
                     }, (error) => {
+                        this.loading = false;
                         console.log(error);
                     });
             }
@@ -102,10 +109,13 @@ export class HomeComponent implements OnInit {
 
         dialogRef.afterClosed().subscribe((data) => {
             if (data) {
+                this.loading = true;
                 this.issueService.updateIssue(data)
                     .subscribe((response) => {
+                        this.loading = false;
                         this.issueService.updateIssueList(response.issue);
                     }, (error) => {
+                        this.loading = false;
                         console.log(error);
                     })
             }
@@ -119,10 +129,13 @@ export class HomeComponent implements OnInit {
 
         dialogRef.afterClosed().subscribe((data) => {
             if (data) {
+                this.loading = true;
                 this.issueService.deleteIssue(data.id)
                     .subscribe((response) => {
+                        this.loading = false;
                         this.issueService.removeFromIssueList(data.id);
                     }, (error) => {
+                        this.loading = false;
                         console.log(error);
                     });
             }
