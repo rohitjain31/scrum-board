@@ -25,7 +25,7 @@ export class HomeComponent implements OnInit {
     private readonly dialogConfig = new MatDialogConfig();
 
     public constructor(public dialog: MatDialog,
-        private snackBar: MatSnackBar
+        private snackBar: MatSnackBar,
         private issueService: IssueService) { }
 
     public ngOnInit() {
