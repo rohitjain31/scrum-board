@@ -17,10 +17,12 @@ export class CardViewComponent implements OnInit {
 
     public ngOnInit() {}
 
+    // Emitting issue data for edit functionality
     public editIssueDialog() {
         this.editDialog.emit(this.issueValue);
     }
 
+    // Emitting issue data for delete functionality
     public deleteIssueDialog() {
         this.deleteDialog.emit(this.issueValue);
     }
