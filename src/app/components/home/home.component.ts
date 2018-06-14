@@ -25,6 +25,7 @@ export class HomeComponent implements OnInit, OnDestroy {
     public allIssue: Issue[] = [];
     public issueObjects: any;
     public loading = false;
+    public textKeys = TextKeys;
 
     public constructor(public dialog: MatDialog,
         private snackBar: MatSnackBar,

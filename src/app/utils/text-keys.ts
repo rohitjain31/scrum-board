@@ -1,4 +1,6 @@
 export class TextKeys {
+    public static appTitle = 'Scrum Board';
+    public static createIssue = 'Create Issue';
     public static addIssue = 'Add Issue';
     public static updateIssue = 'Update Issue';
     public static deleteIssue = 'Delete Issue';
@@ -21,6 +23,7 @@ export class TextKeys {
     public static testColor = '#a4bcc8';
     public static deployColor = '#76b0d9';
     public static doneColor = 'lightgreen';
+    public static noIssueMessage = 'There is no existing issue. Please create one.';
     public static deleteConfirmationMessage = 'Are you sure, you want to delete Issue??';
     public static addMessage = 'Issue added successfully';
     public static updateMessage = 'Issue updated successfully';

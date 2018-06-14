@@ -1,10 +1,10 @@
 <mat-toolbar color="primary">
     <mat-toolbar-row>
-        <span>Scrum Board</span>
+        <span>{{ textKeys.appTitle }}</span>
         <span class="example-spacer"></span>
         <button mat-raised-button color="primary"
             (click)="openCreateIssueDialouge()"
-        >Create Issue</button>
+        >{{ textKeys.createIssue }}</button>
     </mat-toolbar-row>
 </mat-toolbar>
 
@@ -49,5 +49,5 @@
 </div>
 
 <div *ngIf="allIssue.length === 0 && !loading" class="no-issue">
-    <h3>There is no existing issue. Please create one.</h3>
+    <h3>{{ textKeys.noIssueMessage }}</h3>
 </div>
