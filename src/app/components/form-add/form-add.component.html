@@ -15,28 +15,28 @@
 
     <mat-form-field>
         <mat-select placeholder="Issue Type" formControlName="type">
-            <mat-option value="userstory">User Story</mat-option>
-            <mat-option value="bug">Bug</mat-option>
-            <mat-option value="task">Task</mat-option>
-            <mat-option value="spike">Spike</mat-option>
+            <mat-option value="userstory">{{ textKeys.userStory }}</mat-option>
+            <mat-option value="bug">{{ textKeys.bug }}</mat-option>
+            <mat-option value="task">{{ textKeys.task }}</mat-option>
+            <mat-option value="spike">{{ textKeys.spike }}</mat-option>
         </mat-select>
     </mat-form-field>
 
     <mat-form-field>
         <mat-select placeholder="Stage" formControlName="stage">
-            <mat-option value="backlog">Backlog</mat-option>
-            <mat-option value="plan">Plan</mat-option>
-            <mat-option value="develop">Develop</mat-option>
-            <mat-option value="test">Test</mat-option>
-            <mat-option value="deploy">Deploy</mat-option>
-            <mat-option value="done">Done</mat-option>
+            <mat-option value="backlog">{{ textKeys.backlog }}</mat-option>
+            <mat-option value="plan">{{ textKeys.plan }}</mat-option>
+            <mat-option value="develop">{{ textKeys.develop }}</mat-option>
+            <mat-option value="test">{{ textKeys.test }}</mat-option>
+            <mat-option value="deploy">{{ textKeys.deploy }}</mat-option>
+            <mat-option value="done">{{ textKeys.done }}</mat-option>
         </mat-select>
     </mat-form-field>
 </mat-dialog-content>
 
 <mat-dialog-content *ngIf="deleteForm">
     <div>
-        Are you sure, you want to delete Issue??
+        {{ textKeys.deleteConfirmationMessage }}
     </div>
 </mat-dialog-content>
 

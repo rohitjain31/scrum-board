@@ -13,6 +13,7 @@ export class FormAddComponent implements OnInit {
 
     private form: FormGroup;
     public deleteForm: boolean;
+    public textKeys = TextKeys;
 
     public constructor(private fb: FormBuilder,
         private dialogRef: MatDialogRef<FormAddComponent>,

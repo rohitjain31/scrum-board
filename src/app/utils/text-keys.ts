@@ -5,6 +5,10 @@ export class TextKeys {
     public static create = 'Create';
     public static update = 'Update';
     public static delete = 'Delete';
+    public static userStory = 'User Story';
+    public static bug = 'Bug';
+    public static task = 'Task';
+    public static spike = 'Spike';
     public static backlog = 'Backlog';
     public static plan = 'Plan';
     public static develop = 'Develop';
@@ -17,6 +21,7 @@ export class TextKeys {
     public static testColor = '#a4bcc8';
     public static deployColor = '#76b0d9';
     public static doneColor = 'lightgreen';
+    public static deleteConfirmationMessage = 'Are you sure, you want to delete Issue??';
     public static addMessage = 'Issue added successfully';
     public static updateMessage = 'Issue updated successfully';
     public static deleteMessage = 'Issue deleted successfully';
