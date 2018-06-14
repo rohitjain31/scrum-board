@@ -1,5 +1,4 @@
 export class TextKeys {
-    public static apiUrl = 'https://aqueous-depths-69894.herokuapp.com/api/issues';
     public static addIssue = 'Add Issue';
     public static updateIssue = 'Update Issue';
     public static deleteIssue = 'Delete Issue';

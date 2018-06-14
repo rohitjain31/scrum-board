@@ -3,7 +3,11 @@
 // The list of file replacements can be found in `angular.json`.
 
 export const environment = {
-  production: false
+    production: false,
+    name: 'dev',
+    apiBaseUrls: {
+        issues: 'https://aqueous-depths-69894.herokuapp.com/api/issues'
+    }
 };
 
 /*

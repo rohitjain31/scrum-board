@@ -2,6 +2,7 @@ import { Injectable, EventEmitter } from '@angular/core';
 import { HttpClient, HttpHeaders, HttpParams, HttpErrorResponse } from '@angular/common/http';
 import { Issue } from './../models/issue';
 import { TextKeys } from '../utils/text-keys';
+import { environment } from '../../environments/environment';
 import { Observable, throwError } from 'rxjs';
 import { catchError } from 'rxjs/operators';
 
@@ -11,7 +12,7 @@ import { catchError } from 'rxjs/operators';
 export class IssueService {
 
     public issueList: Issue[] = [];
-    private readonly apiUrl = TextKeys.apiUrl;
+    private readonly apiUrl = environment.apiBaseUrls.issues;
     public issueListChanged = new EventEmitter<Issue[]>();
     public issueObj = {};
     public tilesInfo = [
