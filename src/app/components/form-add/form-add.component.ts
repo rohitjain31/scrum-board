@@ -2,6 +2,7 @@ import { Component, OnInit, Inject, ViewEncapsulation } from '@angular/core';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material';
 import { FormBuilder, Validators, FormGroup } from '@angular/forms';
 import { ActionType } from './../../models/action-type.enum';
+import { TextKeys } from '../../utils/text-keys';
 
 @Component({
     selector: 'app-form-add',
@@ -36,11 +37,11 @@ export class FormAddComponent implements OnInit {
     public get getDialogTitle() {
         switch (this.data.action) {
             case ActionType.Add:
-                return 'Add Issue';
+                return TextKeys.addIssue;
             case ActionType.Update:
-                return 'Update Issue';
+                return TextKeys.updateIssue;
             case ActionType.Delete:
-                return 'Delete Issue';
+                return TextKeys.deleteIssue;
             default:
                 return '';
         }
@@ -50,11 +51,11 @@ export class FormAddComponent implements OnInit {
     public get getButtonText() {
         switch (this.data.action) {
             case ActionType.Add:
-                return 'Create';
+                return TextKeys.create;
             case ActionType.Update:
-                return 'Update';
+                return TextKeys.update;
             case ActionType.Delete:
-                return 'Delete';
+                return TextKeys.delete;
             default:
                 return '';
         }
